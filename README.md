@@ -40,6 +40,12 @@ This will require a database and a way to populate it, which could be done throu
 
 A help guide for each Hosting information (cPanel, PIE, etc.) that provides information on how to get owner information. This would be a hardcoded HTML page that can be updated via Github. 
 
+If we use this, we still need a way to get Net IDs of the owner of the site. Recommend using data-* tags on the body, specifically:
+* data-owner: NetID of the owner
+* data-host: Name of the host if not available through IP addresses
+
+``` <body data-owner="jonker" data-host="Random Hosting Service"> ```
+
 ## Emergency Checker
 
 An API that scans the Illini Alert emergency notification system for potential issues. It includes:
