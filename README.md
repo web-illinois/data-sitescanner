@@ -28,12 +28,15 @@ Editor's note: we are leaning towards *Data Pointer* because it is simpler to im
 A help guide for each Hosting information (cPanel, PIE, etc.) that provides information on how to get owner information. This would be a hardcoded HTML page that can be updated via Github. 
 
 If we use this, we still need a way to get Net IDs of the owner of the site. Recommend using data-* tags on the head or body, specifically:
-* data-owner: NetID of the owner or alternate email address if not available through NetID
-* data-host: Name of the host -- this will override IP address lookup
+* data-owner: NetID, email address, or contact information of the owner. 
+* data-host: Name of the host -- this will override IP address lookup.
+* data-js: A flag to indicate that the site should load JavaScript to get a full scan. This is in preparation for future expansions. 
 
 Example:
 
 ``` <head data-owner="jonker" data-host="Random Hosting Service"> ```
+
+We will read the `<head>` tag first, then the `<body>`.
 
 #### Data Repository
 
