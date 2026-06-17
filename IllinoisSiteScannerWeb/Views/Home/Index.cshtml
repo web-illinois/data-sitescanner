@@ -1,16 +1,23 @@
 ﻿@{
     ViewData["Title"] = "Website Platform Check | Illinois";
 }
-
+<script>
+    document.addEventListener("DOMContentLoaded", (event) => { 
+        document.getElementById('url').addEventListener('keydown', (e) => { if (e.key === "Enter") {
+            window.location.href = '/?url=' + encodeURIComponent(document.getElementById('url').value);
+        }});
+    });
+</script>
 <ilw-content width="page">
     <h1>Website Platform Check</h1>
     <p>This is a simple tool used to check the properties of a website.</p>
     <p>This information can also be accessed via an API
         <code>/api/scanner?url={url}</code>
     </p>
+    <p>Note that this is a simple application that reads the HTML directly. It does not read heading or toolkit information that may be interjected via JavaScript.</p>
     <div class="ils-input-entry">
         <label for="url">URL to check:</label>
-        <input id="url" type="text" class="ils-input-long" value="@Model.WebsiteInformation.Url">
+        <input id="url" type="text" class="ils-input-long" value="@Model.WebsiteInformation.Url" onkeydown="">
     </div>
     <button class="ilw-button" onclick="window.location.href = '/?url=' + encodeURIComponent(document.getElementById('url').value);">Check Site</button>
     <ilw-spacer></ilw-spacer>
@@ -26,14 +33,29 @@
             <li><span>Hostname:</span> @Model.WebsiteInformation.Host</li>
             <li><span>Absolute URI:</span> @Model.WebsiteInformation.AbsoluteUri</li>
             <li><span>IP Address:</span> @Model.WebsiteInformation.IpAddress</li>
-            <li><span>Hosting Information:</span> @Model.WebsiteInformation.HostingInformation</li>
+            <li><span>Hosting Information:</span> @Html.Raw(Model.WebsiteInformation.HostingHtml.ToString())</li>
             <li><span>CMS Information:</span> @Model.WebsiteInformation.CmsInformation</li>
+            <li><span>Owner:</span> @Model.WebsiteInformation.Owner</li>
             <li><span>New Toolkit Information:</span> @Model.WebsiteInformation.NewToolkit</li>
             <li><span>Old Toolkit Information:</span> @Model.WebsiteInformation.OldToolkit</li>
             <li><span>H1 Information:</span> @Model.WebsiteInformation.HeaderInformation</li>
             <li><span>Server Information:</span> @Model.WebsiteInformation.ServerInformation</li>
             <li><span>Primary Site:</span> @Model.WebsiteInformation.PrimarySiteInformation</li>
             <li><span>Parent Site:</span> @Model.WebsiteInformation.ParentSiteInformation</li>
+        </ul>
+        <h3>Version 2 Components used</h3>
+        <ul>
+        @foreach (var item in Model.WebsiteInformation.V2Components)
+        {
+            <li>@item</li>
+        }
+        </ul>
+        <h3>Version 3 Components used</h3>
+        <ul>
+        @foreach (var item in Model.WebsiteInformation.V3Components)
+        {
+            <li>@item</li>
+        }
         </ul>
     }
     @if (!Model.WebsiteInformation.IsSuccessful)

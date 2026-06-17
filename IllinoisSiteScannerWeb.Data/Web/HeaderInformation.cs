@@ -1,15 +1,15 @@
-﻿using System.Text.RegularExpressions;
+﻿using HtmlAgilityPack;
 
 namespace IllinoisSiteScannerWeb.Data.Web {
 
     internal static class HeaderInformation {
 
-        internal static string Check(string html) {
-            var match = Regex.Match(html, "<h1.*?>(.*?)</h1>");
-            if (match.Success) {
-                return TagRemover.RemoveTags(match.Groups[1].Value);
+        internal static string Check(HtmlDocument doc) {
+            var headers = doc.DocumentNode.SelectNodes("//h1");
+            if (headers == null || headers.Count() == 0) {
+                return "No H1 found";
             }
-            return "No H1 found";
+            return string.Join(" / ", headers.Select(h => h.InnerText));
         }
     }
 }

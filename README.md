@@ -13,11 +13,27 @@ A website that checks a website’s basic platform characteristics (IP/hosting h
 
 Hosting information (cPanel, PIE) is looked up via IP address / Name using the static class `HostingInformation`. 
 
-This class contains a hardcoded list of IP addresses and hostnames and their associated hosting information. If you need to add your hosting information, you can add it to the `HostingInformation` class. 
+This class contains a hardcoded list of IP addresses and hostnames and their associated hosting information. If you need to add your hosting information, you can add it to the `HostingInformation` class.
+
+The `HostingInformation` class also has an optional link that allows CMS owners to point testers to a help guide for testers in order to record issues. 
 
 ### Future Plans
 
 This can go one of two ways:
+
+Editor's note: we are leaning towards *Data Pointer* because it is simpler to implement. 
+
+#### Data Pointer
+
+A help guide for each Hosting information (cPanel, PIE, etc.) that provides information on how to get owner information. This would be a hardcoded HTML page that can be updated via Github. 
+
+If we use this, we still need a way to get Net IDs of the owner of the site. Recommend using data-* tags on the head or body, specifically:
+* data-owner: NetID of the owner or alternate email address if not available through NetID
+* data-host: Name of the host -- this will override IP address lookup
+
+Example:
+
+``` <head data-owner="jonker" data-host="Random Hosting Service"> ```
 
 #### Data Repository
 
@@ -35,16 +51,6 @@ This will require a database and a way to populate it, which could be done throu
 - login, with the ability to update and delete hosting information codes and add API keys for bots/scripts to use to populate the database. This will also allow us to manage the IP information via a database.
 - an API endpoint to add/update entries, which could be used by the hosting platforms to populate the database
 - the ability to transfer information to another NetID. 
-
-#### Data Pointer
-
-A help guide for each Hosting information (cPanel, PIE, etc.) that provides information on how to get owner information. This would be a hardcoded HTML page that can be updated via Github. 
-
-If we use this, we still need a way to get Net IDs of the owner of the site. Recommend using data-* tags on the body, specifically:
-* data-owner: NetID of the owner
-* data-host: Name of the host if not available through IP addresses
-
-``` <body data-owner="jonker" data-host="Random Hosting Service"> ```
 
 ## Emergency Checker
 

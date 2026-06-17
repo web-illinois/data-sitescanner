@@ -1,4 +1,5 @@
-﻿using IllinoisSiteScannerWeb.Data.Web;
+﻿using HtmlAgilityPack;
+using IllinoisSiteScannerWeb.Data.Web;
 using System.Net;
 
 namespace IllinoisSiteScannerWeb.Data {
@@ -29,24 +30,35 @@ namespace IllinoisSiteScannerWeb.Data {
                 _ = response.EnsureSuccessStatusCode();
                 var html = await response.Content.ReadAsStringAsync();
 
+                var doc = new HtmlDocument();
+                doc.LoadHtml(html);
+
                 var myUri = new Uri(url);
                 var ip = Dns.GetHostAddresses(response?.RequestMessage?.RequestUri?.Host ?? myUri.Host)[0];
                 returnValue.AbsoluteUri = response?.RequestMessage?.RequestUri?.AbsoluteUri ?? myUri.AbsoluteUri;
                 returnValue.Host = response?.RequestMessage?.RequestUri?.Host ?? myUri.Host;
                 returnValue.IpAddress = ip.ToString();
-                returnValue.HostingInformation = HostingInformation.Check(ip.ToString(), response?.RequestMessage?.RequestUri?.Host ?? myUri.Host);
-                returnValue.CmsInformation = CmsInformation.Check(html, ip.ToString());
+                returnValue.CmsInformation = CmsInformation.Check(html, returnValue.IpAddress);
+                returnValue.HostingInformation = HostingInformation.Check(returnValue.IpAddress, returnValue.Host, returnValue.CmsInformation);
                 returnValue.ServerInformation = ServerInformation.Check(response?.Headers?.Server?.ToString() ?? "");
                 var (oldToolkit, newToolkit) = ToolkitInformation.Check(html);
                 returnValue.OldToolkit = oldToolkit;
                 returnValue.NewToolkit = newToolkit;
-                returnValue.HeaderInformation = HeaderInformation.Check(html);
+                var (owner, host) = AttributeInformation.CheckAttributes(doc);
+                returnValue.Owner = owner;
+                if (!string.IsNullOrWhiteSpace(host)) {
+                    returnValue.HostingInformation = host;
+                }
+                returnValue.HeaderInformation = HeaderInformation.Check(doc);
                 returnValue.PrimarySiteInformation = PrimarySiteInformation.CheckSite(html);
                 returnValue.ParentSiteInformation = PrimarySiteInformation.Check(html);
+                returnValue.HostingInformationHelpLink = HostingInformation.GetLink(returnValue.HostingInformation);
+                returnValue.V2Components = ToolkitInformation.Version2Components(html);
+                returnValue.V3Components = ToolkitInformation.Version3Components(html);
                 returnValue.IsSuccessful = true;
             } catch (Exception e) {
                 returnValue.IsSuccessful = false;
-                returnValue.ErrorMessage = e.Message;
+                returnValue.ErrorMessage = e.GetType()?.ToString() ?? "" + " - " + e.Message;
             }
             return returnValue;
         }
