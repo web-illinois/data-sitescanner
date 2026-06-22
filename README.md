@@ -11,11 +11,11 @@ A website that checks a website’s basic platform characteristics (IP/hosting h
 
 ### Hosting information
 
-Hosting information (cPanel, PIE) is looked up via IP address / Name using the static class `HostingInformation`. 
+Hosting information (cPanel, PIE) is looked up via IP address / Name using the static class `HostingInformation` (at https://github.com/web-illinois/data-sitescanner/blob/main/IllinoisSiteScannerWeb.Data/Web/HostingInformation.cs). 
 
 This class contains a hardcoded list of IP addresses and hostnames and their associated hosting information. If you need to add your hosting information, you can add it to the `HostingInformation` class.
 
-The `HostingInformation` class also has an optional link that allows CMS owners to point testers to a help guide for testers in order to record issues. 
+The `HostingInformation` class also has an optional `HelpLinksForHosting ` dictionary that allows CMS owners to point testers to a help guide for testers in order to record issues. 
 
 ### Future Plans
 
@@ -30,7 +30,7 @@ A help guide for each Hosting information (cPanel, PIE, etc.) that provides info
 If we use this, we still need a way to get Net IDs of the owner of the site. Recommend using data-* tags on the head or body, specifically:
 * data-owner: NetID, email address, or contact information of the owner. 
 * data-host: Name of the host -- this will override IP address lookup.
-* data-js: A boolean flag to indicate that the site should load JavaScript to get a full scan. This is in preparation for future expansions. 
+* data-js: A boolean flag to indicate that the site should load JavaScript to get a full scan. Default is false (do not load JavaScript). This is in preparation for future expansions. 
 
 Example:
 
