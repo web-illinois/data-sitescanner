@@ -1,6 +1,6 @@
-# IllinoisSiteScannerWeb
+# data-sitescanner
 
-A small ASP.NET Core web app that contains two sets of tools
+A small ASP.NET Core web app that contains two sets of tools. This is going to be part of the WIGG data component suite. 
 
 ## Illinois Site Scanner
 
