@@ -17,6 +17,8 @@ namespace ScannerConsole {
             }
         }
 
+        internal static string GetHeader() => "URL,IsSuccessful?,Error Message,IP Address,Hosting Information,Hosting Link,CMS Information,Header Information,Primary Site,Parent Site,Server Information";
+
         internal static string ConvertToCsv(this string s) => s.Replace(".", "-").Replace("http://", "").Replace("https://", "") + ".csv";
     }
 }

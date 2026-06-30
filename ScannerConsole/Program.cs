@@ -41,7 +41,7 @@ if (File.Exists(pathRead)) {
         await File.WriteAllLinesAsync(pathWrite + item.Key.ConvertToCsv(), item.Value);
         Console.WriteLine("Writing file " + item.Key.ConvertToCsv());
     }
-    await File.WriteAllLinesAsync(pathWrite + "main.csv", output.Select(o => o.Value.First()));
+    await File.WriteAllLinesAsync(pathWrite + "main.csv", new[] { ApiHelper.GetHeader() }.Concat(output.Select(o => o.Value.First())));
     await File.WriteAllLinesAsync(pathWrite + "errors.csv", errors);
 
 } else {
