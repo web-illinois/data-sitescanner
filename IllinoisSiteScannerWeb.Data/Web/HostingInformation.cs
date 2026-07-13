@@ -3,6 +3,7 @@
     internal static class HostingInformation {
 
         private static Dictionary<string, string> HostIpAddress = new() {
+            { "75.2.20.195", "cPanel for Mission Critical Sites" },
             { "18.220.149.166", "cPanel" },
             { "18.160.200.125", "PIE" },
             { "13.59.228.241", "PIE" }
@@ -18,6 +19,7 @@
         };
 
         private static Dictionary<string, string> HelpLinksForHosting = new() {
+            { "cPanel for Mission Critical Sites", "" },
             { "cPanel", "" },
             { "PIE", "" },
             { "Sitefinity", "" },
