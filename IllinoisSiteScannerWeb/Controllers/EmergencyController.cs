@@ -29,10 +29,12 @@ namespace IllinoisSiteScannerWeb.Controllers {
         [HttpGet("test")]
         [AllowAnonymous]
         [DisableCors]
-        public IActionResult Test() => new JsonResult(new Alert {
-            Title = "Illini-Alert. TEST ALERT. Do not cross Wright Street at Daniel or Chalmers while crews address gas leak.",
-            Description = "Illini-Alert. TEST ALERT.  Do not cross Wright Street at Daniel or Chalmers while crews address gas leak. Pedestrians may cross Wright Street at Green, John or Armory. Want more ways to be notified by Illini - Alert? Follow us on Twitter at http://twitter.com/illinialert and facebook at http://www.facebook.com/illinialert."
-        });
+        public IActionResult Test() =>
+            new JsonResult("");
+        // new JsonResult(new Alert {
+        // Title = "Illini-Alert. TEST ALERT. Do not cross Wright Street at Daniel or Chalmers while crews address gas leak.",
+        // Description = "Illini-Alert. TEST ALERT.  Do not cross Wright Street at Daniel or Chalmers while crews address gas leak. Pedestrians may cross Wright Street at Green, John or Armory. Want more ways to be notified by Illini - Alert? Follow us on Twitter at http://twitter.com/illinialert and facebook at http://www.facebook.com/illinialert."
+        // });
 
     }
 }
