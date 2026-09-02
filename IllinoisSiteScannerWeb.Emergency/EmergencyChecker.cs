@@ -4,8 +4,10 @@ namespace IllinoisSiteScannerWeb.Emergency {
 
     public static class EmergencyChecker {
 
+        private static string EmergencyUrl => "https://content.getrave.com/cap/uiuc/channel1";
+
         public static Alert Check() {
-            var node = XElement.Load("http://content.getrave.com/cap/uiuc/channel1");
+            var node = XElement.Load(EmergencyUrl);
             var info = node.Descendants().FirstOrDefault(n => n.Name.LocalName == "info");
             if (info == null) {
                 return new Alert();
