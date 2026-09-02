@@ -43,14 +43,14 @@
             <li><span>Primary Site:</span> @Model.WebsiteInformation.PrimarySiteInformation</li>
             <li><span>Parent Site:</span> @Model.WebsiteInformation.ParentSiteInformation</li>
         </ul>
-        <h3>Version 2 Components used</h3>
+        <h3>Version 2 Components used on this page</h3>
         <ul>
         @foreach (var item in Model.WebsiteInformation.V2Components)
         {
             <li>@item</li>
         }
         </ul>
-        <h3>Version 3 Components used</h3>
+        <h3>Version 3 Components used on this page</h3>
         <ul>
         @foreach (var item in Model.WebsiteInformation.V3Components)
         {
