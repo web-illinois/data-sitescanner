@@ -7,7 +7,7 @@ A small ASP.NET Core web app that contains two sets of tools. This is going to b
 A website that checks a website’s basic platform characteristics (IP/hosting hints, CMS hints, Illinois toolkit hints, headers, server banner, etc.). It includes:
 
 - A simple web UI (`/`) to enter a URL and view results
-- A JSON API endpoint: `/api/scanner?url={url}`
+- A JSON API endpoint: `/api/scanner?url={url}` 
 
 ### Hosting information
 
