@@ -44,8 +44,11 @@ namespace IllinoisSiteScannerWeb.Data {
                 var (oldToolkit, newToolkit) = ToolkitInformation.Check(html);
                 returnValue.OldToolkit = oldToolkit;
                 returnValue.NewToolkit = newToolkit;
+                returnValue.Owner = OwnerInformation.GetOwner(doc);
                 var (owner, host) = AttributeInformation.CheckAttributes(doc);
-                returnValue.Owner = owner;
+                if (!string.IsNullOrWhiteSpace(owner)) {
+                    returnValue.Owner = owner;
+                }
                 if (!string.IsNullOrWhiteSpace(host)) {
                     returnValue.HostingInformation = host;
                 }

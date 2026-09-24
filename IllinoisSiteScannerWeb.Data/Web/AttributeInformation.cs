@@ -25,7 +25,7 @@ namespace IllinoisSiteScannerWeb.Data.Web {
                     returnValueHost = body.GetAttributeValue(HostAttribute, "");
                 }
             }
-            return (string.IsNullOrWhiteSpace(returnValueOwner) ? "No owner found" : returnValueOwner, returnValueHost);
+            return (returnValueOwner, returnValueHost);
         }
     }
 }
