@@ -20,7 +20,6 @@
                     _alert = _action();
                     IsPendingCall = false;
                 }
-                // if message is older than 15 minutes, then change the pending call to Safe seconds and blank out the alert
             } catch (Exception e) {
                 _alert.LastUpdated = DateTime.Now + TimeSpan.FromSeconds(NumberOfSecondsError);
                 _alert.Error = e.ToString();

@@ -10,6 +10,7 @@
         public string? Description { get; set; }
         public string? Error { get; set; }
         public bool IsSafe => string.IsNullOrWhiteSpace(ResponseType) || ResponseType.Equals("AllClear", StringComparison.OrdinalIgnoreCase) || ResponseType.Equals("None", StringComparison.OrdinalIgnoreCase);
+        public bool IsStale => MessageSent < DateTime.UtcNow.AddHours(-2);
         public DateTime LastUpdated { get; set; }
         public DateTime MessageSent { get; set; }
         public string? ResponseType { get; set; }

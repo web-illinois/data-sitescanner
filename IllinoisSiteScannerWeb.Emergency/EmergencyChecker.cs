@@ -15,10 +15,10 @@ namespace IllinoisSiteScannerWeb.Emergency {
             var alert = new Alert {
                 ResponseType = info.GetNodeValue("responseType") ?? "",
                 Title = info.GetNodeValue("headline") ?? "",
-                // MessageSent = DateTime.TryParse(node.GetNodeValue("sent"), out var sent) ? sent : DateTime.MinValue,
+                MessageSent = DateTime.TryParse(node.GetNodeValue("sent"), out var sent) ? sent.ToUniversalTime() : DateTime.MinValue,
                 Description = info.GetNodeValue("description") ?? ""
             };
-            return alert.IsSafe ? new Alert() : alert;
+            return alert.IsSafe || alert.IsStale ? new Alert() : alert;
         }
 
         private static string? GetNodeValue(this XElement element, string name) {
